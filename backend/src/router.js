@@ -11,4 +11,7 @@ router.get('/', (req, res) => {
 // Get All Tests
 router.get('/tasks', tasksController.getAll)
 
+// Create Task
+router.post('/tasks', tasksController.createTask)
+
 module.exports = router
