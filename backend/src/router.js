@@ -1,5 +1,6 @@
 const express = require('express')
 const tasksController = require('./controllers/tasksController')
+const tasksMiddleware = require('./middlewares/tasksMiddlewares')
 
 const router = express.Router()
 
@@ -12,6 +13,6 @@ router.get('/', (req, res) => {
 router.get('/tasks', tasksController.getAll)
 
 // Create Task
-router.post('/tasks', tasksController.createTask)
+router.post('/tasks', tasksMiddleware.validateBody, tasksController.createTask)
 
 module.exports = router
