@@ -13,9 +13,16 @@ router.get('/', (req, res) => {
 router.get('/tasks', tasksController.getAll)
 
 // Create Task
-router.post('/tasks', tasksMiddleware.validateBody, tasksController.createTask)
+router.post('/tasks', tasksMiddleware.validateFieldTitle, tasksController.createTask)
 
 // Delete Task
 router.delete('/tasks/:id', tasksController.deleteTask)
+
+// Update Task
+router.put('/tasks/:id',
+	tasksMiddleware.validateFieldTitle,
+	tasksMiddleware.validateFieldStatus,
+	tasksController.updateTask
+)
 
 module.exports = router
