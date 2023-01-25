@@ -15,4 +15,7 @@ router.get('/tasks', tasksController.getAll)
 // Create Task
 router.post('/tasks', tasksMiddleware.validateBody, tasksController.createTask)
 
+// Delete Task
+router.delete('/tasks/:id', tasksController.deleteTask)
+
 module.exports = router
