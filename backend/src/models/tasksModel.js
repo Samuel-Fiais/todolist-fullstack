@@ -24,12 +24,23 @@ const createTask = async (task) => {
 }
 
 const deleteTask = async (id) => {
-	const removedTask = await connection.execute('DELETE FROM TODOLIST.TASKS WHERE ID = ?', [id])
+	const [removedTask] = await connection.execute('DELETE FROM TODOLIST.TASKS WHERE ID = ?', [id])
+	await connection.execute('ALTER TABLE TODOLIST.TASKS AUTO_INCREMENT = 1')
 	return removedTask
+}
+
+const updateTask = async (id, task) => {
+	const { title, status } = task
+	console.log(task)
+	const query = 'UPDATE TODOLIST.TASKS SET TITLE = ?, STATUS = ? WHERE ID = ?'
+
+	const [updatedTask] = await connection.execute(query, [title, status, id])
+	return updatedTask
 }
 
 module.exports = {
 	getAll,
 	createTask,
-	deleteTask
+	deleteTask,
+	updateTask
 }
