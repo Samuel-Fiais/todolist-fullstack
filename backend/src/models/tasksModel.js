@@ -23,7 +23,13 @@ const createTask = async (task) => {
 	return createdTask.insertId
 }
 
+const deleteTask = async (id) => {
+	const removedTask = await connection.execute('DELETE FROM TODOLIST.TASKS WHERE ID = ?', [id])
+	return removedTask
+}
+
 module.exports = {
 	getAll,
-	createTask
+	createTask,
+	deleteTask
 }
